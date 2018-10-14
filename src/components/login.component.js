@@ -49,6 +49,7 @@ class Login extends Component {
             try {
                 const res = await api.get('/clients');
                 this.props.setToken(token);
+                this.props.setClients(res.data);
                 this.props.history.push("/home");
 
             } catch (e) {

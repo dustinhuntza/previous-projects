@@ -10,16 +10,24 @@ class App extends Component {
         super(props);
         this.state = {
             loggedin: false,
-            token: null
+            token: null,
+            clients: null
         }
         this.setToken = this.setToken.bind(this);
         this.logOut = this.logOut.bind(this);
+        this.setClients = this.setClients.bind(this);
     }
 
     setToken(token) {
         this.setState({
             token: token,
             loggedin: true
+        })
+    }
+
+    setClients(clients) {
+        this.setState({
+            clients: clients
         })
     }
 
@@ -34,10 +42,10 @@ class App extends Component {
             <BrowserRouter>
                 <Fragment>
                     <Route exact path="/" render={({ history }) => {
-                        return <Login setToken={this.setToken} history={history}/>
+                        return <Login setToken={this.setToken} history={history} setClients={this.setClients}/>
                     }}/>
-                    <Route exact path="/home" render={() => <Home logOut={this.logOut} token={this.state.token}/>}/>
-                    <Route exact path="/manage-accounts" component={ManageAccounts}/>
+                    <Route exact path="/home" render={() => <Home logOut={this.logOut} clients={this.state.clients} token={this.state.token}/>}/>
+                    <Route exact path="/manage-accounts" render={() => <ManageAccounts clients={this.state.clients} token={this.state.token}/>}/>
                 </Fragment>
             </BrowserRouter>
         );

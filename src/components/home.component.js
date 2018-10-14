@@ -8,7 +8,6 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clients: [],
             accounts: [],
             isLoading: false
         };
@@ -29,11 +28,9 @@ class Home extends Component {
                     isLoading: true
                 });
 
-                const clients = await api.get('/clients');
-                const accounts = await api.get(`/accounts/${clients.data[0]._id}`);
+                const accounts = await api.get(`/accounts/${this.props.clients[0]._id}`);
 
                 this.setState({
-                    clients: clients.data,
                     accounts: accounts.data,
                     isLoading: false
                 });
@@ -56,60 +53,40 @@ class Home extends Component {
 
         return (
             <Fragment>
-                <Navigation/>
+                <Navigation clients={this.props.clients}/>
+                <div className="container">
+                    {
+                        this.state.accounts.map((account) => (
+                            <div key={account._id} className="card-deck">
+                                <div className="card">
+                                    <div className="card-body text-left">
 
-                <div>
+                                        <p className="card-text">
+                                            {`Account: ${account.description}`}
+                                        </p>
 
-                    <div className="navbar">
-                        {this.state.clients.map(x =>
-                            <h3 key={x._id}>
-                                {`Welcome ${x.first} ${x.last}`}
-                            </h3>
-                        )}
+                                        <p className="card-text">
+                                            {`Type: ${account.type}`}
+                                        </p>
 
-                        <div className="navButtons">
-                            <a href="GettingStarted.html">Switch Account</a>
-                            <br/>
-                            <Link to="/">Sign Out</Link>
-                        </div>
-                    </div>
-
-                    <div className="container">
-                        {
-                            this.state.accounts.map((account) => (
-                                <div key={account._id} className="card-deck">
-                                    <div className="card">
-                                        <div className="card-body text-left">
-
-                                            <p className="card-text">
-                                                {`Account: ${account.description}`}
-                                            </p>
-
-                                            <p className="card-text">
-                                                {`Type: ${account.type}`}
-                                            </p>
-
-                                            <p className="card-text">
-                                                {`Balance: R${account.balance}`}
-                                            </p>
-                                        </div>
+                                        <p className="card-text">
+                                            {`Balance: R${account.balance}`}
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
 
-                            ))
-                        }
-                    </div>
-
-                    <ul>
-                        {this.state.clients.map(x =>
-                            <li key={x._id}>
-                                {`${x.first} ${x.last} - ${x.usernames}`}
-                            </li>
-                        )}
-                    </ul>
-                    ;
-
+                        ))
+                    }
                 </div>
+
+                <ul>
+                    {this.props.clients.map(x =>
+                        <li key={x._id}>
+                            {`${x.first} ${x.last} - ${x.usernames}`}
+                        </li>
+                    )}
+                </ul>
             </Fragment>
         )
     }
