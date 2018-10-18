@@ -1,0 +1,12 @@
+.list {
+  text-align: center;
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+  margin: auto;
+}
+.Buttons {
+  text-align: center;
+  margin-top: 20px;
+}
