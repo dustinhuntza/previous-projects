@@ -1,11 +1,21 @@
 import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
+import "../css/manage-acc.css"
+import {Link} from "react-router-dom";
 
 class ManageAccounts extends Component {
     constructor(props) {
         super(props);
-        this.state = {accounts: []};
+        this.state = {
+          accounts: [],
+          acc: null,
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+
     }
 
     componentDidMount() {
@@ -44,31 +54,66 @@ class ManageAccounts extends Component {
             <Fragment>
                 <Navigation clients={this.props.clients}/>
                 <h1>Manage Accounts</h1>
-                <ul>
+
+                <div class="row">
+                  <div class="col-sm-6">
+
+                  <ul>
                     {
-                        this.state.accounts.map((account) => (
-                            <div key={account._id} className="card-deck">
-                                <div className="card">
-                                    <div className="card-body text-left">
+                      this.state.accounts.map((account)=> (
+                        <div key={account._id} class="container">
+                          <div class="card">
 
-                                        <p className="card-text">
-                                            {`Account: ${account.description}`}
-                                        </p>
+                              <div class="card-header">{`${account.type}`}</div>
+                              <div class="card-body">{`Balance: R${account.balance}`}</div>
+                              <Link to="/view-account"><div class="card-body"><button onClick={this.handleClick}>View Account</button></div></Link>
 
-                                        <p className="card-text">
-                                            {`Type: ${account.type}`}
-                                        </p>
+                          </div>
+                        </div>
+                      ))
+                   }
+                 </ul>
 
-                                        <p className="card-text">
-                                            {`Balance: R${account.balance}`}
-                                        </p>
-                                    </div>
-                                </div>
+                  </div>
+
+                  <div class="col-sm-6">
+
+                    <div class="container">
+                      <div class="login-form">
+                        <form>
+                            <h2 class="text-center">Apply for new Account</h2>
+                            <div class="form-group">
+                              <label for="sel1">Select Account Type (select one):</label>
+                              <select class="form-control" id="sel1">
+                                <option>Cheque</option>
+                                <option>Savings</option>
+                                <option>Credit</option>
+                                <option>Investment</option>
+                              </select>
                             </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="ID number" required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Proof of Address" required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" class="form-control" placeholder="Date of birth" required="required"/>
+                            </div>
+                            <div class="form-group">
+                              <a href="Home.html">
+                                <button type="button" class="btn btn-primary btn-block">Apply</button>
+                              </a>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
 
-                        ))
-                    }
-                </ul>
+
+
+                  </div>
+                </div>
             </Fragment>
         )
     }

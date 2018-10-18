@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react"
 import jsSHA from "jssha"
 import "../css/login.css"
 import axios from "axios"
+import {Link} from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -87,7 +88,7 @@ class Login extends Component {
                             <button type="submit" className="btn btn-primary btn-block">Log in</button>
 
                         </form>
-                        <p className="text-center"><a href="Register.html">Create an Account</a></p>
+                          <Link to="/register"><p className="text-center">Create an Account</p></Link>
                     </div>
                 </div>
             </Fragment>

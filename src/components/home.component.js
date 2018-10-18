@@ -54,39 +54,22 @@ class Home extends Component {
         return (
             <Fragment>
                 <Navigation clients={this.props.clients}/>
-                <div className="container">
-                    {
-                        this.state.accounts.map((account) => (
-                            <div key={account._id} className="card-deck">
-                                <div className="card">
-                                    <div className="card-body text-left">
-
-                                        <p className="card-text">
-                                            {`Account: ${account.description}`}
-                                        </p>
-
-                                        <p className="card-text">
-                                            {`Type: ${account.type}`}
-                                        </p>
-
-                                        <p className="card-text">
-                                            {`Balance: R${account.balance}`}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        ))
-                    }
-                </div>
 
                 <ul>
-                    {this.props.clients.map(x =>
-                        <li key={x._id}>
-                            {`${x.first} ${x.last} - ${x.usernames}`}
-                        </li>
-                    )}
-                </ul>
+                  {
+                    this.state.accounts.map((account)=> (
+                      <div key={account._id} class="container">
+                        <div class="card">
+
+                            <Link to="/view-account"><div class="card-header">{`${account.type}`}</div></Link>
+                            <div class="card-body">{`Balance: R${account.balance}`}</div>
+
+                        </div>
+                      </div>
+                    ))
+                 }
+               </ul>
+
             </Fragment>
         )
     }
