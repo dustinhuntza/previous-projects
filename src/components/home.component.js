@@ -61,7 +61,7 @@ class Home extends Component {
                       <div key={account._id} class="container">
                         <div class="card">
 
-                            <Link to="/view-account"><div class="card-header">{`${account.type}`}</div></Link>
+                            <Link to={`/view-account/${account._id}`}><div class="card-header">{`${account.type}`}</div></Link>
                             <div class="card-body">{`Balance: R${account.balance}`}</div>
 
                         </div>

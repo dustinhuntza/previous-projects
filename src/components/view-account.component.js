@@ -9,6 +9,8 @@ class ViewAccounts extends Component {
         this.state = {
           accounts: [],
         };
+
+        this.renderTransactions = this.renderTransactions.bind(this);
     }
 
     componentDidMount() {
@@ -27,11 +29,12 @@ class ViewAccounts extends Component {
                 });
 
                 const accounts = await api.get(`/accounts/${this.props.clients[0]._id}`);
+                const transactions = await api.get(`/transactions/${this.props.match.params.accountId}/.*`);
 
+                this.props.setTransactions(transactions.data, this.props.match.params.accountId);
 
                 this.setState({
                     accounts: accounts.data,
-
                     isLoading: false
                 });
                 // console.log(accounts);
@@ -43,6 +46,18 @@ class ViewAccounts extends Component {
                 })
             }
         })();
+    }
+
+    renderTransactions() {
+        debugger;
+        if (this.props.transactions !== null) {
+            return this.props.transactions[this.props.match.params.accountId].map(transaction => {
+                return <div>
+                    <p className="card-text">{transaction.type}</p>
+                    <p className="card-text">{transaction.amount}</p>
+                </div>
+            });
+        }
     }
 
     render() {
@@ -63,15 +78,9 @@ class ViewAccounts extends Component {
                       <div class="card">
                         <div class="card-body">
                           <h4 class="card-title">Transacation History</h4>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
-                          <p class="card-text">HISTORY</p>
+                            <div class="card-transactions">
+                                {this.renderTransactions()}
+                            </div>
                         </div>
                       </div>
                     </div>
