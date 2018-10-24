@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/view-acc.css"
+import Support from "./support.component";
 
 class ViewAccounts extends Component {
     constructor(props) {
@@ -145,7 +146,7 @@ class ViewAccounts extends Component {
                   </div>
                 </div>
 
-
+              <Support />
             </Fragment>
         )
     }

@@ -3,6 +3,7 @@ import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/manage-acc.css"
 import {Link} from "react-router-dom";
+import Support from "./support.component";
 
 class ManageAccounts extends Component {
     constructor(props) {
@@ -111,6 +112,7 @@ class ManageAccounts extends Component {
 
                   </div>
                 </div>
+              <Support />
             </Fragment>
         )
     }

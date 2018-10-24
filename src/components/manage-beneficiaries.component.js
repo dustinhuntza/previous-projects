@@ -3,6 +3,7 @@ import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/manage-ben.css"
 import {Link} from "react-router-dom";
+import Support from "./support.component";
 
 class ManageBeneficiaries extends Component {
     constructor(props) {
@@ -62,6 +63,7 @@ class ManageBeneficiaries extends Component {
                 <div class="list">
                     <Link to="/view-beneficiary"><p>{this.state.beneficiaries.name}</p></Link>
                 </div>
+              <Support />
             </Fragment>
         )
     }

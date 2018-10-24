@@ -10,6 +10,7 @@ import MakeFuturePayments from "./makeFuturePayment.component";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import "../css/make-payments.css"
+import Support from "./support.component";
 
 class MakePayments extends Component {
     constructor(props) {
@@ -86,7 +87,7 @@ class MakePayments extends Component {
                     {this.state.view === 'view4' && <MakeFuturePayments clients={this.props.clients} token={this.props.token}/>}
                 </div>
 
-
+              <Support />
             </Fragment>
         )
     }

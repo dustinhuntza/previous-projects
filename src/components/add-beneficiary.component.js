@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/add-ben.css"
+import Support from "./support.component";
 
 class AddBeneficiary extends Component {
     constructor(props) {
@@ -101,7 +102,7 @@ class AddBeneficiary extends Component {
                     </div>
                   </div>
                 </div>
-
+              <Support />
             </Fragment>
         )
     }

@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/transfer.css"
+import Support from "./support.component";
 
 class Transfer extends Component {
     constructor(props) {
@@ -134,6 +135,7 @@ class Transfer extends Component {
                         </form>
                     </div>
                   </div>
+              <Support />
             </Fragment>
         )
     }

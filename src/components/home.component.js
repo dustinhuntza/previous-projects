@@ -3,6 +3,7 @@ import axios from "axios";
 import {Link} from "react-router-dom"
 import "../css/home.css"
 import Navigation from "./nav.component";
+import Support from "./support.component";
 
 class Home extends Component {
     constructor(props) {
@@ -69,7 +70,7 @@ class Home extends Component {
                     ))
                  }
                </ul>
-
+               <Support />
             </Fragment>
         )
     }

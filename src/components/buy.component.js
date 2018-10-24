@@ -5,6 +5,7 @@ import BuyAirtimeBen from "./buyAirtimeBeneficiary.component";
 import BuyElec from "./buyElec.component";
 import axios from "axios";
 import "../css/buy.css"
+import Support from "./support.component";
 
 
 class Buy extends Component {
@@ -65,6 +66,7 @@ class Buy extends Component {
                 </div>
 
                 </div>
+              <Support />
             </Fragment>
         )
     }

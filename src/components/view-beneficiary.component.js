@@ -2,12 +2,13 @@ import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
 import "../css/add-ben.css"
+import Support from "./support.component";
 
 class ViewBeneficiary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          accounts: [],  
+          accounts: [],
           beneficiaries: {
               name:"Pikkie",
               bank:"Absa",
@@ -75,7 +76,7 @@ class ViewBeneficiary extends Component {
                   <p></p>
                   <button type="button" class="btn btn-ghost btn-ghost-bordered center-block">Delete Beneficiary</button>
                 </div>
-
+              <Support />
             </Fragment>
         )
     }
