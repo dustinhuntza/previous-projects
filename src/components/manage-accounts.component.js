@@ -11,12 +11,9 @@ class ManageAccounts extends Component {
           accounts: [],
           acc: null,
         };
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick() {
 
     }
+
 
     componentDidMount() {
         (async () => {
@@ -66,7 +63,7 @@ class ManageAccounts extends Component {
 
                               <div class="card-header">{`${account.type}`}</div>
                               <div class="card-body">{`Balance: R${account.balance}`}</div>
-                              <Link to={`/view-account/${account._id}`}><div class="card-body"><button onClick={this.handleClick}>View Account</button></div></Link>
+                              <Link to={`/view-account/${account._id}`}><div class="card-body"><button>View Account</button></div></Link>
 
                           </div>
                         </div>

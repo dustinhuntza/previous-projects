@@ -23,6 +23,7 @@ class App extends Component {
             token: null,
             clients: null,
             transactions: null,
+
         };
         this.setToken = this.setToken.bind(this);
         this.logOut = this.logOut.bind(this);

@@ -7,7 +7,17 @@ import {Link} from "react-router-dom";
 class ManageBeneficiaries extends Component {
     constructor(props) {
         super(props);
-        this.state = {accounts: []};
+        this.state = {
+          accounts: [],
+          beneficiaries: {
+              name:"Pikkie",
+              bank:"FNB",
+              branch:"Absa Branch",
+              accType:"Cheque",
+              accNr:"123456",
+              ref:"Rent"
+          }
+        };
     }
 
     componentDidMount() {
@@ -50,7 +60,7 @@ class ManageBeneficiaries extends Component {
                 </div>
                 <h1>Manage Beneficiaries</h1>
                 <div class="list">
-                    <Link to="/view-beneficiary"><p>Beneficiary 1</p></Link>
+                    <Link to="/view-beneficiary"><p>{this.state.beneficiaries.name}</p></Link>
                 </div>
             </Fragment>
         )

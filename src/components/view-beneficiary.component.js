@@ -6,8 +6,19 @@ import "../css/add-ben.css"
 class ViewBeneficiary extends Component {
     constructor(props) {
         super(props);
-        this.state = {accounts: []};
+        this.state = {
+          accounts: [],  
+          beneficiaries: {
+              name:"Pikkie",
+              bank:"Absa",
+              branch:"Absa Branch",
+              accType:"Savings",
+              accNr:"123456",
+              ref:"Rent"
+          }
+        };
     }
+
 
     componentDidMount() {
         (async () => {
@@ -46,7 +57,11 @@ class ViewBeneficiary extends Component {
                 <Navigation clients={this.props.clients}/>
                 <h1>View Beneficiary</h1>
 
+
+
                 <div class="container">
+                  {/*<input type="text" disabled={this.state.disable} placeholder={this.state.beneficiaries.name}/>
+                    <input type="button" value="Enable/Disable" onClick={this.handleClick.bind(this)}/>*/}
                   <p>Name: Example Name</p>
                   <p>Bank: Bank of The Sun</p>
                   <p>Branch: Branch Name</p>

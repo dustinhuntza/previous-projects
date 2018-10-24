@@ -8,9 +8,23 @@ class ViewAccounts extends Component {
         super(props);
         this.state = {
           accounts: [],
+          search: '.*',
         };
 
         this.renderTransactions = this.renderTransactions.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.setState({search: this.state.search,});
+        alert(this.state.search)
+     }
+
+
+    handleChange = (e) => {
+      this.setState({[e.target.name]: e.target.value});
     }
 
     componentDidMount() {
@@ -53,8 +67,15 @@ class ViewAccounts extends Component {
         if (this.props.transactions !== null) {
             return this.props.transactions[this.props.match.params.accountId].map(transaction => {
                 return <div>
-                    <p className="card-text">{transaction.type}</p>
-                    <p className="card-text">{transaction.amount}</p>
+
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">{transaction.type}</h4>
+                        <p class="card-text text-center">{`Amount: R${transaction.amount}`}</p>
+                        <p class="card-text text-center">{`Balance: R${transaction.balance}`}</p>
+                      </div>
+                    </div>
+
                 </div>
             });
         }
@@ -75,9 +96,9 @@ class ViewAccounts extends Component {
 
                 <div class="row">
                     <div class="col-sm-6">
+                    <h4>Transacation History</h4>
                       <div class="card">
                         <div class="card-body">
-                          <h4 class="card-title">Transacation History</h4>
                             <div class="card-transactions">
                                 {this.renderTransactions()}
                             </div>
@@ -86,13 +107,19 @@ class ViewAccounts extends Component {
                     </div>
 
                 <div class="col-sm-6">
-
+                  <h4>Manage</h4>
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title">Search</h4>
-                      <form>
+                      <form onSubmit={this.handleSubmit}>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search..."/>
+                            <input
+                              name="search"
+                              value={this.state.search}
+                              onChange={e => this.handleChange(e)}
+                              type="text"
+                              class="form-control"
+                              placeholder="Search..."/>
                         </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-primary btn-block">Search</button>
@@ -114,6 +141,7 @@ class ViewAccounts extends Component {
                       </form>
                     </div>
                   </div>
+
                   </div>
                 </div>
 

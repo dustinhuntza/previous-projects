@@ -1,13 +1,39 @@
 import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
+import Payment from "./payment.component";
+
+import MakeOnceOffPayments from "./makeOnceOffPayment.component";
+import PayBen from "./payBen.component";
+import MakeReccuringPayments from "./makeReccuringPayment.component";
+import MakeFuturePayments from "./makeFuturePayment.component";
+
 import axios from "axios";
 import {Link} from "react-router-dom";
+import "../css/make-payments.css"
 
 class MakePayments extends Component {
     constructor(props) {
         super(props);
-        this.state = {accounts: []};
+        this.state = {
+          accounts: [],
+          dropdownVisible: false,
+          view : ''
+        };
     }
+
+    handleClick = view => event => {
+        if (!this.state.dropdownVisible) {
+            document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+             document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+
+        this.setState(prevState => ({
+            dropdownVisible: !prevState.dropdownVisible,
+            view
+        }));
+    }
+
 
     componentDidMount() {
         (async () => {
@@ -44,119 +70,23 @@ class MakePayments extends Component {
         return (
             <Fragment>
                 <Navigation clients={this.props.clients}/>
+
                 <h1>Make Payments</h1>
                 <div class="container">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="login-form">
-                          <form>
-                            <h2 class="text-center">Make Once-off Payment</h2>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Bank" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Branch" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Account Type" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Account Number" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Reference"/>
-                            </div>
-                            <div class="form-group">
-                                <Link to="/payment"><button type="button" class="btn btn-primary btn-block">Next</button></Link>
-                            </div>
-                          </form>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="login-form">
-                        <form>
-                          <h2 class="text-center">Pay Beneficiary</h2>
-                            <div class="radio">
-                              <label><input type="radio" name="optradio"/>Beneficiary 1</label>
-                            </div>
-                            <div class="radio">
-                              <label><input type="radio" name="optradio"/>Beneficiary 2</label>
-                            </div>
-                            <div class="radio disabled">
-                              <label><input type="radio" name="optradio"/>Beneficiary 3</label>
-                            </div>
-                            <div class="radio disabled">
-                              <label><input type="radio" name="optradio"/>Beneficiary 4</label>
-                            </div>
-                            <div class="radio disabled">
-                              <label><input type="radio" name="optradio"/>Beneficiary 5</label>
-                            </div>
-                            <div class="radio disabled">
-                              <label><input type="radio" name="optradio"/>Beneficiary 6</label>
-                            </div>
-                            <div class="radio disabled">
-                              <label><input type="radio" name="optradio"/>Beneficiary 7</label>
-                            </div>
-                            <div class="form-group">
-                                <Link to="/payment"><button type="button" class="btn btn-primary btn-block">Next</button></Link>                           
-                            </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                  <button type="button" onClick={this.handleClick('view1')} class="btn btn-primary active">Make Once-Off Payment</button>
+                  <button type="button" onClick={this.handleClick('view2')} class="btn btn-primary active">Pay Beneficiary</button>
+                  <button type="button" onClick={this.handleClick('view3')} class="btn btn-primary active">Make Reccuring Payment</button>
+                  <button type="button" onClick={this.handleClick('view4')} class="btn btn-primary active">Make Future Dated Payment</button>
                 </div>
 
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="login-form">
-                          <form>
-                            <h2 class="text-center">Make Reccuring Payment</h2>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Reccuring Date" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Beneficiary" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Amount" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Reference"/>
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary btn-block">Pay and Save</button>
-                            </div>
-                          </form>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="login-form">
-                        <form>
-                          <h2 class="text-center">Make Future Dated Payment</h2>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Day to pay each month" required="required"/>
-                          </div>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Beneficiary" required="required"/>
-                          </div>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Amount" required="required"/>
-                          </div>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Reference"/>
-                          </div>
-                          <div class="form-group">
-                              <button type="button" class="btn btn-primary btn-block">Pay and Save</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                <div className="table-container">
+                    {this.state.view === 'view1' && <MakeOnceOffPayments clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view2' && <PayBen clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view3' && <MakeReccuringPayments clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view4' && <MakeFuturePayments clients={this.props.clients} token={this.props.token}/>}
                 </div>
+
+
             </Fragment>
         )
     }

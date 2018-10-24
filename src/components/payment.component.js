@@ -2,10 +2,43 @@ import React, {Component, Fragment} from "react";
 import Navigation from "./nav.component";
 import axios from "axios";
 
+
 class Payment extends Component {
     constructor(props) {
         super(props);
-        this.state = {accounts: []};
+        this.state = {
+          accounts: [],
+          amount: 0,
+          fromAccount:''
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const form = {
+         amount: this.state.amount,
+         fromAccount: this.state.fromAccount,
+        }
+        if (this.state.fromAccount === 'cheque') {
+          let balance = this.state.accounts;
+          balance[0].balance = this.state.accounts[1].balance - this.state.amount;
+          balance = balance - this.state.amount;
+          alert(this.state.accounts[0].balance)
+        }if (this.state.fromAccount === 'credit') {
+          let balance = this.state.accounts;
+          balance[1].balance = this.state.accounts[1].balance - this.state.amount;
+          balance = balance - this.state.amount;
+          alert(this.state.accounts[1].balance)
+        }
+
+     }
+
+
+    handleChange = (e) => {
+      this.setState({[e.target.name]: e.target.value});
     }
 
     componentDidMount() {
@@ -39,31 +72,59 @@ class Payment extends Component {
         })();
     }
 
+    handleBalance(type){
+      return type === "cheque";
+    }
+
     render() {
         return (
             <Fragment>
-                <Navigation clients={this.props.clients}/>
 
                 <div class="login-form">
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                       <h2 class="text-center">Payment</h2>
-                      <p>Payment to EXAMPLE CLIENT</p>
+                      <p>Payment to: {this.props.name}</p>
                       <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Amount" required="required"/>
+                          <input
+                            type="text"
+                            name="amount"
+                            value={this.state.amount}
+                            onChange={e => this.handleChange(e)}
+                            class="form-control"
+                            placeholder="Amount"
+                            required="required"/>
                       </div>
                       <div class="form-group">
-                        <label for="sel1">Select From Account (select one):</label>
-                        <select class="form-control" id="sel1">
-                          <option>Cheque</option>
-                          <option>Savings</option>
+                        <label>Select From Account (select one):</label>
+                        <select
+                          name="fromAccount"
+                          value={this.state.fromAccount}
+                          onChange={e => this.handleChange(e)}
+                          ref="userInput"
+                          defaultValue=""
+                          required>
+                          <option value="" disabled>Choose a Account</option>
+                          {
+                            this.state.accounts.map((account)=> {
+                              return <option key={account._id}
+                                value={account.type}>{account.type}</option>;
+                            })
+                          }
                         </select>
+                        {
+                          this.state.accounts.filter((bal) => bal.type === this.state.fromAccount).map((account)=> (
+                            <p key={account._id}>
+                                  <div>{`Available Balance: R${account.balance}`}</div>
+                              </p>
+                          ))
+                       }
+
                       </div>
                       <div class="form-group">
-                          <button type="button" class="btn btn-primary btn-block">Pay</button>
+                          <button type="submit" class="btn btn-primary btn-block">Pay</button>
                       </div>
                   </form>
               </div>
-
 
             </Fragment>
         )

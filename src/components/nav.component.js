@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import React, {Component, Fragment} from "react";
 import "../css/nav.css"
 
@@ -7,12 +7,15 @@ class Navigation extends Component {
         super(props)
     }
 
+    capitalize (){
+      return this.props.clients.title.toUpperCase()
+    }
+
     render() {
         return (
             <Fragment>
 
             <div>
-
                 <div className="navbar">
                     {this.props.clients.map(x =>
                         <h3 key={x._id}>
@@ -30,12 +33,12 @@ class Navigation extends Component {
 
 
             <div class="scrollmenu">
-              <Link to="/home"><h2>Home</h2></Link>
-              <Link to="/manage-accounts"><h2>Manage Accounts</h2></Link>
-              <Link to="/manage-beneficiaries"><h2>Manage beneficiaries</h2></Link>
-              <Link to="/make-payments"><h2>Make Payments</h2></Link>
-              <Link to="/transfer"><h2>Transfer</h2></Link>
-              <Link to="/buy"><h2>Buy</h2></Link>
+              <NavLink to="/home" exact activeStyle={{color:'red'}}><h2>Home</h2></NavLink>
+              <NavLink to="/manage-accounts" exact activeStyle={{color:'red'}}><h2>Manage Accounts</h2></NavLink>
+              <NavLink to="/manage-beneficiaries" exact activeStyle={{color:'red'}}><h2>Manage beneficiaries</h2></NavLink>
+              <NavLink to="/make-payments" exact activeStyle={{color:'red'}}><h2>Make Payments</h2></NavLink>
+              <NavLink to="/transfer" exact activeStyle={{color:'red'}}><h2>Transfer</h2></NavLink>
+              <NavLink to="/buy" exact activeStyle={{color:'red'}}><h2>Buy</h2></NavLink>
             </div>
 
 
