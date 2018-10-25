@@ -13,6 +13,7 @@ class ViewAccounts extends Component {
         };
 
         this.renderTransactions = this.renderTransactions.bind(this);
+        this.clicked = this.clicked.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -26,6 +27,10 @@ class ViewAccounts extends Component {
 
     handleChange = (e) => {
       this.setState({[e.target.name]: e.target.value});
+    }
+
+    clicked() {
+      alert("Feature to be Added Soon!")
     }
 
     componentDidMount() {
@@ -44,7 +49,7 @@ class ViewAccounts extends Component {
                 });
 
                 const accounts = await api.get(`/accounts/${this.props.clients[0]._id}`);
-                const transactions = await api.get(`/transactions/${this.props.match.params.accountId}/.*`);
+                const transactions = await api.get(`/transactions/${this.props.match.params.accountId}/.${this.state.search}`);
 
                 this.props.setTransactions(transactions.data, this.props.match.params.accountId);
 
@@ -137,7 +142,7 @@ class ViewAccounts extends Component {
                             <input type="text" class="form-control" placeholder="Set Limit"/>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block">Save</button>
+                            <button type="button" onClick={this.clicked} class="btn btn-primary btn-block">Save</button>
                         </div>
                       </form>
                     </div>

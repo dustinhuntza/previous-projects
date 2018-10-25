@@ -73,6 +73,7 @@ class MakeFuturePayments extends Component {
                         <form onSubmit={this.handleSubmit}>
                           <h2 class="text-center">Make Future Dated Payment</h2>
                           <div class="form-group">
+                          <label>Select Date For Future Payment:</label>
                               <input
                                 name="date"
                                 value={this.state.date}

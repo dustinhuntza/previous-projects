@@ -74,6 +74,7 @@ class MakeReccuringPayments extends Component {
                           <form onSubmit={this.handleSubmit}>
                             <h2 class="text-center">Make Reccuring Payment</h2>
                             <div class="form-group">
+                            <label>Select Reccuring Date:</label>
                                 <input
                                   name="recDate"
                                   value={this.state.recDate}
