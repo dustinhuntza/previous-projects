@@ -68,9 +68,36 @@ class ViewAccounts extends Component {
         })();
     }
 
+    componentDidUpdate() {
+        (async () => {
+
+            try {
+                const token = this.props.token;
+
+                const api = axios.create({
+                    baseURL: 'http://45.77.58.134:8080',
+                    headers: {'Authorization': 'Bearer ' + token}
+                });
+
+                if (!this.props.transactions[this.props.match.params.accountId]) {
+                    const transactions = await api.get(`/transactions/${this.props.match.params.accountId}/.${this.state.search}`);
+
+                    this.props.setTransactions(transactions.data, this.props.match.params.accountId);
+                }
+
+
+
+                // console.log(accounts);
+
+            } catch (e) {
+                // handle error.
+            }
+        })();
+    }
+
     renderTransactions() {
-        debugger;
-        if (this.props.transactions !== null) {
+
+        if (this.props.transactions && this.props.transactions[this.props.match.params.accountId]) {
             return this.props.transactions[this.props.match.params.accountId].map(transaction => {
                 return <div>
 
@@ -125,8 +152,26 @@ class ViewAccounts extends Component {
                               onChange={e => this.handleChange(e)}
                               type="text"
                               class="form-control"
-                              placeholder="Search..."/>
+                              placeholder="Search by transaction type"/>
                         </div>
+                          <div className="form-group">
+                              <input
+                                  name="search"
+                                  value=""
+                                  onChange={e => this.handleChange(e)}
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Search: Date From"/>
+                          </div>
+                          <div className="form-group">
+                              <input
+                                  name="search"
+                                  value=""
+                                  onChange={e => this.handleChange(e)}
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Search: Date To"/>
+                          </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-primary btn-block">Search</button>
                         </div>
