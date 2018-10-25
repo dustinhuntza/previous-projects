@@ -23,6 +23,7 @@ class App extends Component {
             token: null,
             clients: null,
             transactions: null,
+            search: null,
             beneficiaries: [
               {
                 id: '0',
@@ -49,6 +50,7 @@ class App extends Component {
         this.logOut = this.logOut.bind(this);
         this.setClients = this.setClients.bind(this);
         this.setTransactions = this.setTransactions.bind(this);
+        this.searchTransactions = this.searchTransactions.bind(this);
 
     }
 
@@ -79,6 +81,16 @@ class App extends Component {
             transactions: {
                 [accountId]: transactions,
                 ...existingTransactions
+            }
+        })
+    }
+
+    searchTransactions(transactions, accountId) {
+        const searchingExistingTransactions = this.state.search;
+        this.setState({
+            transactions: {
+                [accountId]: transactions,
+                ...searchingExistingTransactions
             }
         })
     }
@@ -116,7 +128,8 @@ class App extends Component {
                                      token={this.state.token}
                                      setTransactions={this.setTransactions}
                                      transactions={this.state.transactions}
-                    />}/>
+                                                       search={this.state.search}/>}
+                    />
                     <Route exact path="/manage-beneficiaries"
                       render={() => <ManageBeneficiaries
                                      clients={this.state.clients}
