@@ -5,6 +5,15 @@ import "../css/home.css"
 import Navigation from "./nav.component";
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -54,6 +63,7 @@ class Home extends Component {
 
         return (
             <Fragment>
+            <div style={divStyle}>
                 <Navigation clients={this.props.clients}/>
 
                 <ul>
@@ -62,8 +72,9 @@ class Home extends Component {
                       <div key={account._id} class="container">
                         <div class="card">
 
-                            <Link to={`/view-account/${account._id}`}><div class="card-header">{`${account.type}`}</div></Link>
+                            <div class="card-header">{`${account.type}`}</div>
                             <div class="card-body">{`Balance: R${account.balance}`}</div>
+                            <Link to={`/view-account/${account._id}`}><div class="card-body"><button>View Account</button></div></Link>
 
                         </div>
                       </div>
@@ -71,6 +82,7 @@ class Home extends Component {
                  }
                </ul>
                <Support />
+               </div>
             </Fragment>
         )
     }

@@ -4,6 +4,14 @@ import "../css/login.css"
 import axios from "axios"
 import {Link} from "react-router-dom";
 
+const imgMyimageexample = require('../img/BackgroundLogin.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+};
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -67,7 +75,7 @@ class Login extends Component {
 
         return (
             <Fragment>
-                <div>
+                <div style={divStyle}>
                     <div className="login-form">
                         <form onSubmit={this.handleSubmit}>
                             <h2 className="text-center">Log In</h2>

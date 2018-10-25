@@ -7,6 +7,15 @@ import axios from "axios";
 import "../css/buy.css"
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 
 class Buy extends Component {
     constructor(props) {
@@ -48,6 +57,7 @@ class Buy extends Component {
     render() {
         return (
             <Fragment>
+            <div style = {divStyle}>
                 <Navigation clients={this.props.clients}/>
                 <h1>Buy</h1>
 
@@ -58,7 +68,7 @@ class Buy extends Component {
                 </div>
 
                 <div class="col-sm-4">
-                  <BuyAirtimeBen clients={this.props.clients} token={this.props.token}/>
+                  <BuyAirtimeBen beneficiaries={this.props.beneficiaries} clients={this.props.clients} token={this.props.token}/>
                 </div>
 
                 <div class="col-sm-4">
@@ -67,6 +77,7 @@ class Buy extends Component {
 
                 </div>
               <Support />
+              </div>
             </Fragment>
         )
     }

@@ -5,12 +5,20 @@ import "../css/manage-acc.css"
 import {Link} from "react-router-dom";
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 class ManageAccounts extends Component {
     constructor(props) {
         super(props);
         this.state = {
           accounts: [],
-          acc: null,
         };
 
     }
@@ -50,6 +58,7 @@ class ManageAccounts extends Component {
     render() {
         return (
             <Fragment>
+              <div style={divStyle}>
                 <Navigation clients={this.props.clients}/>
                 <h1>Manage Accounts</h1>
 
@@ -62,7 +71,7 @@ class ManageAccounts extends Component {
                         <div key={account._id} class="container">
                           <div class="card">
 
-                              <div class="card-header">{`${account.type}`}</div>
+                              <div class="card-header">{`${account.description}`}</div>
                               <div class="card-body">{`Balance: R${account.balance}`}</div>
                               <Link to={`/view-account/${account._id}`}><div class="card-body"><button>View Account</button></div></Link>
 
@@ -113,6 +122,7 @@ class ManageAccounts extends Component {
                   </div>
                 </div>
               <Support />
+              </div>
             </Fragment>
         )
     }

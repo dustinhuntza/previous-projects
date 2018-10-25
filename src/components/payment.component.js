@@ -8,7 +8,7 @@ class Payment extends Component {
         super(props);
         this.state = {
           accounts: [],
-          amount: 0,
+          amount: null,
           fromAccount:''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,20 +22,7 @@ class Payment extends Component {
          amount: this.state.amount,
          fromAccount: this.state.fromAccount,
         }
-        if (this.state.fromAccount === 'cheque') {
-          let balance = this.state.accounts;
-          balance[0].balance = this.state.accounts[1].balance - this.state.amount;
-          balance = balance - this.state.amount;
-          alert(this.state.accounts[0].balance)
-        }if (this.state.fromAccount === 'credit') {
-          let balance = this.state.accounts;
-          balance[1].balance = this.state.accounts[1].balance - this.state.amount;
-          balance = balance - this.state.amount;
-          alert(this.state.accounts[1].balance)
-        }
-
      }
-
 
     handleChange = (e) => {
       this.setState({[e.target.name]: e.target.value});
@@ -86,7 +73,9 @@ class Payment extends Component {
                       <p>Payment to: {this.props.name}</p>
                       <div class="form-group">
                           <input
-                            type="text"
+                            type="number"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             name="amount"
                             value={this.state.amount}
                             onChange={e => this.handleChange(e)}

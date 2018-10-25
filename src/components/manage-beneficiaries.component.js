@@ -5,19 +5,21 @@ import "../css/manage-ben.css"
 import {Link} from "react-router-dom";
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 class ManageBeneficiaries extends Component {
     constructor(props) {
         super(props);
         this.state = {
           accounts: [],
-          beneficiaries: {
-              name:"Pikkie",
-              bank:"FNB",
-              branch:"Absa Branch",
-              accType:"Cheque",
-              accNr:"123456",
-              ref:"Rent"
-          }
+
         };
     }
 
@@ -55,15 +57,24 @@ class ManageBeneficiaries extends Component {
     render() {
         return (
             <Fragment>
+            <div style = {divStyle}>
                 <Navigation clients={this.props.clients}/>
                 <div class="Buttons">
                       <Link to="/add-beneficiary"><button type="button" class="btn btn-ghost btn-ghost-bordered center-block">Add Beneficiary</button></Link>
                 </div>
                 <h1>Manage Beneficiaries</h1>
                 <div class="list">
-                    <Link to="/view-beneficiary"><p>{this.state.beneficiaries.name}</p></Link>
+                    {
+                      this.props.beneficiaries.map((ben)=> (
+                        <p>
+                            <Link to={`/view-beneficiary/${ben.id}`}><div>{`Beneficiary: ${ben.name}`}</div></Link>
+                        </p>
+                      ))
+                   }
                 </div>
+
               <Support />
+              </div>
             </Fragment>
         )
     }

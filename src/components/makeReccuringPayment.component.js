@@ -84,14 +84,22 @@ class MakeReccuringPayments extends Component {
                                   required="required"/>
                             </div>
                             <div class="form-group">
-                                <input
-                                  name="beneficiary"
-                                  value={this.state.beneficiary}
-                                  onChange={e => this.handleChange(e)}
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Beneficiary"
-                                  required="required"/>
+                              <label>Select Beneficiary (select one):</label>
+                              <select
+                                name="beneficiary"
+                                value={this.state.beneficiary}
+                                onChange={e => this.handleChange(e)}
+                                ref="userInput"
+                                defaultValue=""
+                                required>
+                                <option value="" disabled>Choose a Beneficiary</option>
+                                {
+                                  this.props.beneficiaries.map((person)=> {
+                                    return <option
+                                      value={person.name}>{person.name}</option>;
+                                  })
+                                }
+                              </select>
                             </div>
                             <div class="form-group">
                               <label>Select From Account (select one):</label>
@@ -121,9 +129,11 @@ class MakeReccuringPayments extends Component {
                             <div class="form-group">
                                 <input
                                   name="amount"
+                                  pattern="[0-9]*"
+                                  inputmode="numeric"
                                   value={this.state.amount}
                                   onChange={e => this.handleChange(e)}
-                                  type="text"
+                                  type="number"
                                   class="form-control"
                                   placeholder="Amount"
                                   required="required"/>

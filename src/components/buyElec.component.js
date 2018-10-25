@@ -67,14 +67,16 @@ class BuyElec extends Component {
             <Fragment>
 
                   <div class="login-form">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                       <h2 class="text-center">Buy Electricity</h2>
                       <div class="form-group">
                           <input
                             name="meterNr"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             value={this.state.meterNr}
                             onChange={e => this.handleChange(e)}
-                            type="text"
+                            type="number"
                             class="form-control"
                             placeholder="Meter Number"
                             required="required"/>
@@ -82,9 +84,11 @@ class BuyElec extends Component {
                       <div class="form-group">
                           <input
                             name="amount"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             value={this.state.amount}
                             onChange={e => this.handleChange(e)}
-                            type="text"
+                            type="number"
                             class="form-control"
                             placeholder="Amount"
                             required="required"/>
@@ -117,9 +121,11 @@ class BuyElec extends Component {
                       <div class="form-group">
                           <input
                             name="phoneNr"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             value={this.state.phoneNr}
                             onChange={e => this.handleChange(e)}
-                            type="text"
+                            type="number"
                             class="form-control"
                             placeholder="Phone Number"
                             required="required"/>

@@ -76,9 +76,22 @@ class PayBen extends Component {
                   <div class="login-form">
                     <form onSubmit={this.handleSubmit}>
                       <h2 class="text-center">Pay Beneficiary</h2>
-                        <div class="radio">
-                          <label><input type="radio" name="optradio" required/>Beneficiary 1</label>
-                        </div>
+                        <label>Select Beneficiary (select one):</label>
+                        <select
+                          name="beneficiary"
+                          value={this.state.beneficiary}
+                          onChange={e => this.handleChange(e)}
+                          ref="userInput"
+                          defaultValue=""
+                          required>
+                          <option value="" disabled>Choose a Beneficiary</option>
+                          {
+                            this.props.beneficiaries.map((person)=> {
+                              return <option
+                                value={person.name}>{person.name}</option>;
+                            })
+                          }
+                        </select>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Next</button>
                         </div>

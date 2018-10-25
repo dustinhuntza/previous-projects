@@ -23,13 +23,36 @@ class App extends Component {
             token: null,
             clients: null,
             transactions: null,
+            beneficiaries: [
+              {
+                id: 1,
+                name:"John",
+                bank:"Absa",
+                branch:"Absa Branch",
+                accType:"Cheque",
+                accNr:"123456",
+                ref:"Rent"
+              },
+              {
+                id: 2,
+                name:"Peter",
+                bank:"FNB",
+                branch:"FNB Branch",
+                accType:"Savings",
+                accNr:"123456",
+                ref:"Rent"
+              },
+            ],
 
         };
         this.setToken = this.setToken.bind(this);
         this.logOut = this.logOut.bind(this);
         this.setClients = this.setClients.bind(this);
         this.setTransactions = this.setTransactions.bind(this);
+
     }
+
+
 
     setToken(token) {
         this.setState({
@@ -60,6 +83,8 @@ class App extends Component {
         })
     }
 
+
+
     render() {
         return (
             <BrowserRouter>
@@ -69,13 +94,13 @@ class App extends Component {
                     }}/>
                     <Route exact path="/home" render={() => <Home logOut={this.logOut} clients={this.state.clients} token={this.state.token}/>}/>
                     <Route exact path="/manage-accounts" render={() => <ManageAccounts clients={this.state.clients} token={this.state.token}/>}/>
-                    <Route exact path="/manage-beneficiaries" render={() => <ManageBeneficiaries clients={this.state.clients} token={this.state.token}/>}/>
-                    <Route exact path="/make-payments" render={() => <MakePayments clients={this.state.clients} token={this.state.token}/>}/>
+                    <Route exact path="/manage-beneficiaries" render={() => <ManageBeneficiaries clients={this.state.clients} token={this.state.token} beneficiaries={this.state.beneficiaries}/>}/>
+                    <Route exact path="/make-payments" render={() => <MakePayments clients={this.state.clients} token={this.state.token} beneficiaries={this.state.beneficiaries}/>}/>
                     <Route exact path="/transfer" render={() => <Transfer clients={this.state.clients} token={this.state.token}/>}/>
-                    <Route exact path="/buy" render={() => <Buy clients={this.state.clients} token={this.state.token}/>}/>
+                    <Route exact path="/buy" render={() => <Buy clients={this.state.clients} token={this.state.token} beneficiaries={this.state.beneficiaries}/>}/>
                     <Route exact path="/view-account/:accountId" render={(props) => <ViewAccounts {...props} clients={this.state.clients} token={this.state.token} setTransactions={this.setTransactions} transactions={this.state.transactions}/>}/>
                     <Route exact path="/add-beneficiary" render={() => <AddBeneficiary clients={this.state.clients} token={this.state.token}/>}/>
-                    <Route exact path="/view-beneficiary" render={() => <ViewBeneficiary clients={this.state.clients} token={this.state.token}/>}/>
+                    <Route exact path="/view-beneficiary/:UserId" render={() => <ViewBeneficiary beneficiaries={this.state.beneficiaries} clients={this.state.clients} token={this.state.token}/>}/>
                     <Route exact path="/payment" render={() => <Payment clients={this.state.clients} token={this.state.token}/>}/>
                     <Route exact path="/register" render={() => <Register clients={this.state.clients} token={this.state.token}/>}/>
                 </Fragment>

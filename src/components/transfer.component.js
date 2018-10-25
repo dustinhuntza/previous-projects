@@ -4,6 +4,15 @@ import axios from "axios";
 import "../css/transfer.css"
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 class Transfer extends Component {
     constructor(props) {
         super(props);
@@ -64,13 +73,11 @@ class Transfer extends Component {
         })();
     }
 
-    check () {
-
-    }
 
     render() {
         return (
             <Fragment>
+            <div style = {divStyle}>
                 <Navigation clients={this.props.clients}/>
                   <div class="container">
                     <div class="login-form">
@@ -122,9 +129,11 @@ class Transfer extends Component {
                             <div class="form-group">
                                 <input
                                   name="amount"
+                                  pattern="[0-9]*"
+                                  inputmode="numeric"
                                   value={this.state.amount}
                                   onChange={e => this.handleChange(e)}
-                                  type="text"
+                                  type="number"
                                   class="form-control"
                                   placeholder="Amount"
                                   required="required"/>
@@ -136,6 +145,7 @@ class Transfer extends Component {
                     </div>
                   </div>
               <Support />
+              </div>
             </Fragment>
         )
     }

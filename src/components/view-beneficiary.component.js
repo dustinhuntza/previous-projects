@@ -9,19 +9,13 @@ class ViewBeneficiary extends Component {
         super(props);
         this.state = {
           accounts: [],
-          beneficiaries: {
-              name:"Pikkie",
-              bank:"Absa",
-              branch:"Absa Branch",
-              accType:"Savings",
-              accNr:"123456",
-              ref:"Rent"
-          }
         };
+
     }
 
 
     componentDidMount() {
+
         (async () => {
 
             try {
@@ -52,6 +46,8 @@ class ViewBeneficiary extends Component {
         })();
     }
 
+
+
     render() {
         return (
             <Fragment>
@@ -60,22 +56,6 @@ class ViewBeneficiary extends Component {
 
 
 
-                <div class="container">
-                  {/*<input type="text" disabled={this.state.disable} placeholder={this.state.beneficiaries.name}/>
-                    <input type="button" value="Enable/Disable" onClick={this.handleClick.bind(this)}/>*/}
-                  <p>Name: Example Name</p>
-                  <p>Bank: Bank of The Sun</p>
-                  <p>Branch: Branch Name</p>
-                  <p>Account Type: Savings</p>
-                  <p>Account Number: 1234567</p>
-                  <p>Reference: Pay Rent</p>
-                </div>
-
-                <div class="Buttons">
-                  <button type="button" class="btn btn-ghost btn-ghost-bordered center-block">Edit Beneficiary</button>
-                  <p></p>
-                  <button type="button" class="btn btn-ghost btn-ghost-bordered center-block">Delete Beneficiary</button>
-                </div>
               <Support />
             </Fragment>
         )

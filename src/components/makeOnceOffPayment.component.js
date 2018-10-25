@@ -20,7 +20,7 @@ class MakeOnceOffPayments extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault();
         const form = {
@@ -127,7 +127,9 @@ class MakeOnceOffPayments extends Component {
                         </div>
                         <div class="form-group">
                             <input
-                              type="text"
+                              type="number"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
                               name="accNr"
                               value={this.state.accNr}
                               onChange={e => this.handleChange(e)}

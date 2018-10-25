@@ -73,8 +73,10 @@ class BuyAirtimeOnceOff extends Component {
                       <h2 class="text-center">Buy Airtime Once-off</h2>
                       <div class="form-group">
                           <input
-                            type="text"
+                            type="number"
                             name="phoneNr"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             value={this.state.phoneNr}
                             onChange={e => this.handleChange(e)}
                             class="form-control"
@@ -121,7 +123,9 @@ class BuyAirtimeOnceOff extends Component {
                       </div>
                       <div class="form-group">
                           <input
-                            type="text"
+                            type="number"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
                             class="form-control"
                             placeholder="Amount"
                             required="required"/>

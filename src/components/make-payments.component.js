@@ -12,6 +12,15 @@ import {Link} from "react-router-dom";
 import "../css/make-payments.css"
 import Support from "./support.component";
 
+const imgMyimageexample = require('../img/BackgroundGeneral.jpg');
+const divStyle = {
+  width: '100%',
+  minHeight: '800px',
+  backgroundImage: `url(${imgMyimageexample})`,
+  backgroundSize: 'cover',
+  marginTop: '5px',
+};
+
 class MakePayments extends Component {
     constructor(props) {
         super(props);
@@ -70,6 +79,7 @@ class MakePayments extends Component {
     render() {
         return (
             <Fragment>
+            <div style = {divStyle}>
                 <Navigation clients={this.props.clients}/>
 
                 <h1>Make Payments</h1>
@@ -82,12 +92,13 @@ class MakePayments extends Component {
 
                 <div className="table-container">
                     {this.state.view === 'view1' && <MakeOnceOffPayments clients={this.props.clients} token={this.props.token}/>}
-                    {this.state.view === 'view2' && <PayBen clients={this.props.clients} token={this.props.token}/>}
-                    {this.state.view === 'view3' && <MakeReccuringPayments clients={this.props.clients} token={this.props.token}/>}
-                    {this.state.view === 'view4' && <MakeFuturePayments clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view2' && <PayBen beneficiaries={this.props.beneficiaries} clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view3' && <MakeReccuringPayments beneficiaries={this.props.beneficiaries} clients={this.props.clients} token={this.props.token}/>}
+                    {this.state.view === 'view4' && <MakeFuturePayments beneficiaries={this.props.beneficiaries} clients={this.props.clients} token={this.props.token}/>}
                 </div>
 
               <Support />
+              </div>
             </Fragment>
         )
     }
