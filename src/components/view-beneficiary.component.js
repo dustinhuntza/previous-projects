@@ -51,7 +51,7 @@ class ViewBeneficiary extends Component {
     renderBeneficiary() {
         //NOT WORKING YET.Getting the param as click on name but doesn't want to render when adding it to map funtion
         //this.props.beneficiaries[this.props.match.params.UserId].map
-        debugger;
+
         if (this.props.beneficiaries !== null) {
             return this.props.beneficiaries.map(ben => {
                 return <div>
